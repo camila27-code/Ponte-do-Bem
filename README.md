@@ -16,10 +16,11 @@ Este projeto foi concebido no âmbito da disciplina de **Programação Orientada
 
 ## Equipe de Desenvolvimento
 
-* Camila Lima de Jesus
+* Suyane Silva de Oliveira
+* Camila Lima Jesus
 * Lucas Vinicius Ribeiro
 * Pedro Henrique Ferreira
-* Suyane Silva de Oliveira
+
 
 ---
 
