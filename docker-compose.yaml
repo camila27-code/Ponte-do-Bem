@@ -1,11 +1,16 @@
+
 services:
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     container_name: ponte-do-bem-backend
     ports:
       - "8080:8080"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     depends_on:
       - database
 
@@ -21,5 +26,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+
 volumes:
   mysql_data:
