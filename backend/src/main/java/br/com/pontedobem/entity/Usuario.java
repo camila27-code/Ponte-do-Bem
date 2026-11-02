@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
+import br.com.pontedobem.enums.PerfilUsuario;
+
 @Entity
 @Table(name = "uso_usuario")
 public class Usuario {
