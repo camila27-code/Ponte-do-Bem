@@ -16,10 +16,10 @@ export const initialDonations: Donation[] = [
 ];
 
 export const beneficiaries = [
-  { name: "Maria Oliveira", family: "6 pessoas", area: "Vila Esperança", priority: "Alta prioridade" },
-  { name: "João Pedro Santos", family: "4 pessoas", area: "Jardim das Flores", priority: "Acompanhamento" },
-  { name: "Ana Paula Ferreira", family: "5 pessoas", area: "Parque das Águas", priority: "Alta prioridade" },
-  { name: "Carlos Eduardo Lima", family: "3 pessoas", area: "Centro", priority: "Acompanhamento" },
+  { name: "Suyane Silva", family: "6 pessoas", area: "Vila Esperança", priority: "Alta prioridade" },
+  { name: "Lucas Bittencourt", family: "4 pessoas", area: "Jardim das Flores", priority: "Acompanhamento" },
+  { name: "Pedro Feitosa", family: "5 pessoas", area: "Parque das Águas", priority: "Alta prioridade" },
+  { name: "Camila Lima", family: "3 pessoas", area: "Centro", priority: "Acompanhamento" },
 ];
 
 export const donors = [
