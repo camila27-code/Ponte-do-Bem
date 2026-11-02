@@ -29,7 +29,7 @@ export function Dashboard({ donations, onNavigate, onAdd }: DashboardProps) {
             <Sparkles size={14} /> Juntos, fazemos a diferença
           </p>
           <h2 className="text-[26px] font-semibold tracking-[-0.05em] md:text-[32px]">
-            Bom dia, Camila <span aria-hidden="true">☀️</span>
+            Olá, Camila!
           </h2>
           <p className="mt-1 text-[13px] text-[#858a80]">
             Veja o impacto que a nossa comunidade está criando.
