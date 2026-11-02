@@ -5,6 +5,22 @@ CREATE DATABASE IF NOT EXISTS ponte_do_bem
 
 USE ponte_do_bem;
 
+CREATE TABLE uso_usuario (
+    uso_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    uso_nome VARCHAR(150) NOT NULL,
+    uso_email VARCHAR(150) NOT NULL UNIQUE,
+    uso_password VARCHAR(255) NOT NULL,
+    uso_perfil VARCHAR(30) NOT NULL DEFAULT 'BENEFICIARIO',
+    uso_ativo BOOLEAN NOT NULL DEFAULT TRUE,
+
+    CONSTRAINT uso_chk_perfil
+        CHECK (uso_perfil IN (
+            'ADMIN',
+            'DOADOR',
+            'BENEFICIARIO'
+        ))
+);
+
 CREATE TABLE psa_pessoa (
     psa_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     psa_nome VARCHAR(150) NOT NULL,
