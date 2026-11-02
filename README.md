@@ -80,6 +80,20 @@ src/
       └── Main.java
 ```
 
+## Front-end
+
+O painel web está em `frontend/` e foi desenvolvido com React, TypeScript e Tailwind CSS. Ele apresenta o resumo das doações, listas de doadores e beneficiários e um formulário interativo para cadastrar doações. Os dados exibidos são de demonstração e ainda não estão conectados ao sistema Java.
+
+Para executar o front-end localmente:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Depois, abra `http://localhost:5173/` no navegador.
+
 ##  Licença
 
 Este projeto é de uso acadêmico e de livre estudo para a comunidade.
