@@ -1,90 +1,110 @@
-# Ponte-do-Bem
+# Ponte do Bem
 
-# Ponte do Bem — Rede Solidária de Doações 
+Sistema acadêmico para organização de doações e aproximação entre doadores e
+beneficiários em situação de vulnerabilidade.
 
-> Aplicação em Java desenvolvida com conceitos de Programação Orientada a Objetos (POO) para gestão, controle e destinação prioritária de doações para famílias e indivíduos em situação de vulnerabilidade.
+O projeto possui:
 
----
+- **API:** Java 21, Spring Boot, Spring Data JPA, Spring Security e MySQL.
+- **Frontend:** React, TypeScript, Vite e Tailwind CSS.
+- **Ambiente completo:** Docker Compose com frontend, API e banco de dados.
 
-##  Sobre o Projeto
+## Pré-requisitos
 
-O **Ponte do Bem** é um sistema desenvolvido em **Java** para organizar e intermediar o fluxo de doações entre doadores e beneficiários. Ele gerencia o cadastro de usuários, categorização de itens doados (alimentos, roupas e produtos de higiene), controle dos estados de cada doação e a aplicação de algoritmos de priorização social e logística.
+Para executar o projeto completo, instale:
 
-Este projeto foi concebido no âmbito da disciplina de **Programação Orientada a Objetos (POO)** ministrada pelo professor **Luiz Santos**.
+- [Git](https://git-scm.com/)
+- [Docker](https://docs.docker.com/get-docker/)
+- Docker Compose v2, incluído no Docker Desktop e nas versões atuais do Docker Engine.
 
----
+Para executar os projetos fora do Docker, também serão necessários:
 
-## Equipe de Desenvolvimento
+- Node.js 22 ou superior e npm
+- JDK 21
+- MySQL 8.4
 
-* Suyane Silva de Oliveira
-* Camila Lima Jesus
-* Lucas Vinicius Ribeiro
-* Pedro Henrique Ferreira
+## Primeiro acesso
 
+Clone o repositório e entre na pasta do projeto:
 
----
-
-##  Principais Funcionalidades
-
-- **Gestão de Pessoas:** Cadastro e consulta de *Doadores* e *Beneficiários*.
-- **Gestão de Doações:** Cadastro e acompanhamento de itens divididos nas categorias:
-  -  *Alimentos* (com indicação de perecibilidade)
-  -  *Roupas*
-  -  *Produtos de Higiene* (com verificação de lacre)
-- **Ciclo de Vida da Doação:** Controle rigoroso dos status (`DISPONIVEL`, `RESERVADA`, `ENTREGUE`, `CANCELADA`).
-- **Priorização Inteligente:**
-  - **Prioridade Social:** Identificação de beneficiários com renda familiar até R$ 1.500,00 ou famílias com 5+ integrantes.
-  - **Prioridade de Item:** Algoritmos específicos por categoria (ex: alimentos perecíveis e itens de higiene lacrados possuem prioridade de saída).
-
----
-
-##  Conceitos de POO Aplicados
-
-| Conceito | Aplicação no Projeto |
-| :--- | :--- |
-| **Herança** | `Pessoa` é a classe base para `Doador` e `Beneficiario`. `Doacao` é a classe base para `DoacaoAlimento`, `DoacaoRoupa` e `DoacaoHigiene`. |
-| **Polimorfismo** | Sobrescrita da lógica do cálculo de prioridade nas subclasse de `Doacao`, permitindo tratamento polimórfico de itens. |
-| **Encapsulamento** | Proteção dos atributos e controle do ciclo de estados das doações através de métodos acessores e mutadores validadores. |
-| **Sobrecarga** | Construtores e métodos auxiliares parametrizados para flexibilidade na instanciação dos objetos. |
-
----
-
-##  Regras de Negócio
-
-1. **Beneficiário Prioritário:** Famílias com renda de até R$ 1.500,00 ou com 5 ou mais integrantes recebem tag de alta prioridade.
-2. **Ciclo de Estados:**
-   - Toda nova doação entra como `DISPONIVEL`.
-   - Uma doação `RESERVADA` fica vinculada a um único beneficiário e não pode sofrer nova reserva.
-   - Doações `ENTREGUE` ou `CANCELADA` possuem estado final e não podem ser reabertas.
-3. **Prioridade dos Itens:**
-   - Alimentos **perecíveis** têm maior urgência que não perecíveis.
-   - Produtos de higiene **lacrados** têm prioridade no fluxo sobre itens não lacrados.
-
----
-
-##  Estrutura do Código (Visão Geral)
-
-```text
-src/
- └── br/com/pontedobem/
-      ├── enums/
-      │    └── StatusDoacao.java
-      ├── models/
-      │    ├── Pessoa.java
-      │    ├── Doador.java
-      │    ├── Beneficiario.java
-      │    ├── Doacao.java
-      │    ├── DoacaoAlimento.java
-      │    ├── DoacaoRoupa.java
-      │    └── DoacaoHigiene.java
-      └── Main.java
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd Ponte-do-Bem
 ```
 
-## Front-end
+Crie o arquivo `.env` a partir do exemplo:
 
-O painel web está em `frontend/` e foi desenvolvido com React, TypeScript e Tailwind CSS. Ele apresenta o resumo das doações, listas de doadores e beneficiários e um formulário interativo para cadastrar doações. Os dados exibidos são de demonstração e ainda não estão conectados ao sistema Java.
+```bash
+cp .env_example .env
+```
 
-Para executar o front-end localmente:
+Abra o `.env` e informe os valores do banco:
+
+```env
+MYSQL_ROOT_PASSWORD=uma-senha-segura
+MYSQL_DATABASE=ponte_do_bem
+MYSQL_USER=ponte_user
+MYSQL_PASSWORD=uma-senha-segura
+```
+
+O arquivo `.env` não deve ser commitado, pois pode conter credenciais.
+
+## Iniciar tudo com Docker Compose
+
+Esta é a forma recomendada para quem acabou de baixar o projeto. Na raiz do
+repositório, execute:
+
+```bash
+docker compose up --build
+```
+
+Na primeira execução, o Docker fará o download das imagens, instalará as
+dependências do frontend e compilará a aplicação. Depois, acesse:
+
+- **Frontend:** http://localhost:5173
+- **API:** http://localhost:8080
+- **Health check:** http://localhost:8080/api/health
+- **Swagger UI:** http://localhost:8080/swagger-ui/index.html
+
+Para iniciar os containers em segundo plano:
+
+```bash
+docker compose up --build -d
+```
+
+Para acompanhar os logs:
+
+```bash
+docker compose logs -f
+```
+
+Para acompanhar apenas a API:
+
+```bash
+docker compose logs -f backend
+```
+
+Para parar os serviços:
+
+```bash
+docker compose down
+```
+
+Os dados do MySQL ficam no volume `mysql_data` e são preservados ao executar
+`docker compose down`. Para apagar também o banco e começar do zero:
+
+```bash
+docker compose down -v
+```
+
+> O comando acima remove permanentemente os dados armazenados nos volumes do
+> projeto.
+
+## Executar o frontend localmente
+
+O frontend atualmente utiliza dados de demonstração em memória e ainda não
+está conectado aos endpoints da API. Para executar com o servidor de
+desenvolvimento do Vite:
 
 ```bash
 cd frontend
@@ -92,8 +112,87 @@ npm install
 npm run dev
 ```
 
-Depois, abra `http://localhost:5173/` no navegador.
+Acesse http://localhost:5173.
 
-##  Licença
+Para gerar e testar o build de produção:
 
-Este projeto é de uso acadêmico e de livre estudo para a comunidade.
+```bash
+npm run build
+npm run preview
+```
+
+## Executar a API localmente
+
+O modo mais simples de disponibilizar o banco é iniciar apenas o serviço
+MySQL pelo Compose:
+
+```bash
+docker compose up -d database
+```
+
+Em outro terminal, execute a API:
+
+```bash
+set -a
+source .env
+set +a
+cd backend
+./mvnw spring-boot:run
+```
+
+No Windows, use:
+
+```powershell
+Get-Content .env | ForEach-Object {
+  if ($_ -match '^([^#=]+)=(.*)$') {
+    [Environment]::SetEnvironmentVariable($matches[1], $matches[2], 'Process')
+  }
+}
+cd backend
+.\mvnw.cmd spring-boot:run
+```
+
+A API ficará disponível em http://localhost:8080. O arquivo `.env` da raiz
+precisa estar configurado antes de iniciar o banco; as variáveis também devem
+ser exportadas no terminal que inicia a API.
+
+Para executar os testes da API:
+
+```bash
+cd backend
+./mvnw test
+```
+
+## Estrutura do projeto
+
+```text
+.
+├── backend/              # API Spring Boot
+├── frontend/             # Aplicação React
+├── banco_do_projeto.sql  # Script SQL do projeto
+├── docker-compose.yaml   # Frontend, API e MySQL
+└── .env_example          # Modelo das variáveis de ambiente
+```
+
+## Funcionalidades do frontend
+
+- Dashboard com resumo das doações.
+- Cadastro de doações em formulário.
+- Busca e filtro por categoria.
+- Listagem de doadores e beneficiários.
+- Interface responsiva para desktop e dispositivos móveis.
+
+Os dados do painel são demonstrativos nesta versão. A persistência e a
+integração completa entre o frontend e a API serão implementadas em uma etapa
+posterior.
+
+## Equipe
+
+- Suyane Silva de Oliveira
+- Camila Lima Jesus
+- Lucas Vinicius Ribeiro
+- Pedro Henrique Ferreira
+
+## Licença
+
+Projeto acadêmico para estudo e desenvolvimento da comunidade.
